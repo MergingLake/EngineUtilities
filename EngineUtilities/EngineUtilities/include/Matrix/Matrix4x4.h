@@ -62,7 +62,8 @@ namespace EngineMath {
       @return A Matrix4x4 representing the translation.
       @details This method creates a translation matrix that can be used to translate points in 3D space.
 		*/
-    static Matrix4x4 translation(float tx, float ty, float tz) {
+    static Matrix4x4 
+      translation(float tx, float ty, float tz) {
       return Matrix4x4(1.0f, 0.0f, 0.0f, tx,
         0.0f, 1.0f, 0.0f, ty,
         0.0f, 0.0f, 1.0f, tz,
@@ -76,7 +77,8 @@ namespace EngineMath {
       @details This method creates a translation matrix that can be used to translate points in 3D space
 			using a Vector3 for the translation components.
 		*/
-    static Matrix4x4 translation(const Vector3& t) {
+    static Matrix4x4 
+      translation(const Vector3& t) {
       return translation(t.x, t.y, t.z);
     }
     
@@ -86,7 +88,8 @@ namespace EngineMath {
       @return A Matrix4x4 representing the rotation.
 			@details This method creates a rotation matrix that can be used to rotate points around the X-axis.
 		*/
-    static Matrix4x4 rotationX(float angleRad) {
+    static Matrix4x4 
+      rotationX(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix4x4(1.0f, 0.0f, 0.0f, 0.0f,
@@ -101,7 +104,8 @@ namespace EngineMath {
       @return A Matrix4x4 representing the rotation.
 			@details This method creates a rotation matrix that can be used to rotate points around the Y-axis.
 		*/
-    static Matrix4x4 rotationY(float angleRad) {
+    static Matrix4x4 
+      rotationY(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix4x4(c, 0.0f, s, 0.0f,
@@ -116,7 +120,8 @@ namespace EngineMath {
       @return A Matrix4x4 representing the rotation.
       @details This method creates a rotation matrix that can be used to rotate points around the Z-axis.
 		*/
-    static Matrix4x4 rotationZ(float angleRad) {
+    static Matrix4x4 
+      rotationZ(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix4x4(c, -s, 0.0f, 0.0f,
@@ -133,7 +138,8 @@ namespace EngineMath {
       @return A Matrix4x4 representing the scaling.
 			@details This method creates a scaling matrix that can be used to scale points in 3D space.
 		*/
-    static Matrix4x4 scale(float sx, float sy, float sz) {
+    static Matrix4x4 
+      scale(float sx, float sy, float sz) {
       return Matrix4x4(sx, 0.0f, 0.0f, 0.0f,
         0.0f, sy, 0.0f, 0.0f,
         0.0f, 0.0f, sz, 0.0f,
@@ -147,7 +153,8 @@ namespace EngineMath {
 			@details This method creates a scaling matrix that can be used to scale points in 3D space
 			using a Vector3 for all three scaling factors.
 		*/
-    static Matrix4x4 scale(const Vector3& s) {
+    static Matrix4x4 
+      scale(const Vector3& s) {
       return scale(s.x, s.y, s.z);
     }
     
@@ -158,7 +165,8 @@ namespace EngineMath {
       @details This operator allows access to the elements of the matrix using an index.
       If the index is out of bounds, it defaults to returning m[0] to avoid undefined behavior.
 		*/
-    float& operator[](int index) {
+    float& 
+      operator[](int index) {
       return m[index];
     }
 
@@ -169,7 +177,8 @@ namespace EngineMath {
       @details This operator allows read-only access to the elements of the matrix using an index.
 			If the index is out of bounds, it defaults to returning m[0] to avoid undefined behavior.
     */
-    const float& operator[](int index) const {
+    const float& 
+      operator[](int index) const {
       return m[index];
     }
     
@@ -179,7 +188,8 @@ namespace EngineMath {
       @return A new Matrix4x4 instance representing the result of the multiplication.
       @details This operator performs matrix multiplication, which is used to combine transformations.
 		*/
-    Matrix4x4 operator*(const Matrix4x4& other) const {
+    Matrix4x4 
+      operator*(const Matrix4x4& other) const {
       Matrix4x4 result;
       for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -198,7 +208,8 @@ namespace EngineMath {
       @return A new Vector4 instance representing the result of the multiplication.
       @details This operator performs matrix-vector multiplication, which is used to transform vectors in 3D space.
 		*/
-    Vector4 operator*(const Vector4& vec) const {
+    Vector4 
+      operator*(const Vector4& vec) const {
       return Vector4(
         m[0] * vec.x + m[1] * vec.y + m[2] * vec.z + m[3] * vec.w,
         m[4] * vec.x + m[5] * vec.y + m[6] * vec.z + m[7] * vec.w,
@@ -213,7 +224,8 @@ namespace EngineMath {
       @return A reference to this matrix after multiplication.
 			@details This operator performs matrix multiplication and assigns the result to this matrix.
 		*/
-    Matrix4x4& operator*=(const Matrix4x4& other) {
+    Matrix4x4& 
+      operator*=(const Matrix4x4& other) {
       *this = *this * other;
       return *this;
     }
@@ -225,7 +237,8 @@ namespace EngineMath {
 			@details This operator checks if two matrices are approximately equal using a small epsilon value
 			to account for floating-point precision errors.
 		*/
-    bool operator==(const Matrix4x4& other) const {
+    bool 
+      operator==(const Matrix4x4& other) const {
       for (int i = 0; i < 16; ++i) {
         if (!EngineMath::approxEqual(m[i], other.m[i])) {
           return false;
@@ -240,7 +253,8 @@ namespace EngineMath {
       @return True if the matrices are not equal, false otherwise.
 			@details This operator checks if two matrices are not equal by negating the equality check.
 		*/
-    bool operator!=(const Matrix4x4& other) const {
+    bool 
+      operator!=(const Matrix4x4& other) const {
       return !(*this == other);
     }
     
@@ -249,7 +263,8 @@ namespace EngineMath {
       @return A new Matrix4x4 instance that is the transpose of this matrix.
 			@details This method swaps rows and columns of the matrix, which is useful in various mathematical operations.
 		*/
-    Matrix4x4 transpose() const {
+    Matrix4x4 
+      transpose() const {
       return Matrix4x4(m[0], m[4], m[8], m[12],
         m[1], m[5], m[9], m[13],
         m[2], m[6], m[10], m[14],
@@ -262,7 +277,8 @@ namespace EngineMath {
 			@details This method calculates the determinant, which is useful for determining if the matrix is invertible
 			and for solving linear equations.
 		*/
-    float determinant() const {
+    float 
+      determinant() const {
       return m[0] * getMinorDeterminant(1, 2, 3, 1, 2, 3) -
         m[1] * getMinorDeterminant(0, 2, 3, 1, 2, 3) +
         m[2] * getMinorDeterminant(0, 1, 3, 1, 2, 3) -
@@ -280,7 +296,8 @@ namespace EngineMath {
 			@return The determinant of the specified 3x3 submatrix.
 			@details This method calculates the determinant of a 3x3 submatrix formed by the specified rows and columns.
 		*/
-    float getMinorDeterminant(int r0, int r1, int r2, int c0, int c1, int c2) const {
+    float 
+      getMinorDeterminant(int r0, int r1, int r2, int c0, int c1, int c2) const {
       float m00 = m[r0 * 4 + c0];
       float m01 = m[r0 * 4 + c1];
       float m02 = m[r0 * 4 + c2];
@@ -304,7 +321,8 @@ namespace EngineMath {
       @details This method calculates the inverse of the matrix, which is useful for undoing transformations.
 			If the matrix is not invertible, it returns a zero matrix.
 		*/
-    Matrix4x4 inverse() const {
+    Matrix4x4 
+      inverse() const {
       float det = determinant();
       if (EngineMath::approxEqual(det, 0.0f)) {
         // Matriz no invertible.
@@ -370,7 +388,8 @@ namespace EngineMath {
       @return A new Vector3 representing the transformed point.
 			@details This method applies the matrix transformation to a point, converting it from local space to world space.
 		*/
-    Vector3 transformPoint(const Vector3& point) const {
+    Vector3 
+      transformPoint(const Vector3& point) const {
       Vector4 temp(point.x, point.y, point.z, 1.0f);
       temp = (*this) * temp;
 
@@ -387,7 +406,8 @@ namespace EngineMath {
       @details This method applies the matrix transformation to a direction vector, which does not include translation.
       The w component is set to 0.0f to indicate that it is a direction rather than a point.
 		*/
-    Vector3 transformDirection(const Vector3& direction) const {
+    Vector3 
+      transformDirection(const Vector3& direction) const {
       Vector4 temp(direction.x, direction.y, direction.z, 0.0f);
       temp = (*this) * temp;
       return Vector3(temp.x, temp.y, temp.z);
@@ -400,7 +420,8 @@ namespace EngineMath {
       @details This method applies the matrix transformation to a normal vector, which is used for lighting calculations.
 			The w component is set to 0.0f to indicate that it is a direction rather than a point.
 		*/
-    static const Matrix4x4 Identity;
+    static const 
+      Matrix4x4 Identity;
   };
   
   const Matrix4x4 Matrix4x4::Identity(1.0f, 0.0f, 0.0f, 0.0f,

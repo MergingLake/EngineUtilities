@@ -51,7 +51,8 @@ namespace EngineMath {
       @return A Matrix3x3 representing the translation.
 			@details This method creates a translation matrix that can be used to translate points in 3D space.
     */
-    static Matrix3x3 rotationX(float angleRad) {
+    static Matrix3x3 
+      rotationX(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix3x3(1.0f, 0.0f, 0.0f,
@@ -65,7 +66,8 @@ namespace EngineMath {
       @return A Matrix3x3 representing the rotation.
       @details This method creates a rotation matrix that can be used to rotate points around the Y-axis in 3D space.
 		*/
-    static Matrix3x3 rotationY(float angleRad) {
+    static Matrix3x3 
+      rotationY(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix3x3(c, 0.0f, s,
@@ -79,7 +81,8 @@ namespace EngineMath {
       @return A Matrix3x3 representing the rotation.
       @details This method creates a rotation matrix that can be used to rotate points around the Z-axis in 3D space.
     */
-    static Matrix3x3 rotationZ(float angleRad) {
+    static Matrix3x3 
+      rotationZ(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix3x3(c, -s, 0.0f,
@@ -95,7 +98,8 @@ namespace EngineMath {
       @return A Matrix3x3 representing the scaling.
       @details This method creates a scaling matrix that can be used to scale points in 3D space.
     */
-    static Matrix3x3 scale(float sx, float sy, float sz) {
+    static Matrix3x3 
+      scale(float sx, float sy, float sz) {
       return Matrix3x3(sx, 0.0f, 0.0f,
         0.0f, sy, 0.0f,
         0.0f, 0.0f, sz);
@@ -108,7 +112,8 @@ namespace EngineMath {
       @details This method creates a scaling matrix that can be used to scale points in 3D space
       using a Vector3 for all three scaling factors.
     */
-    static Matrix3x3 scale(const Vector3& s) {
+    static Matrix3x3 
+      scale(const Vector3& s) {
       return scale(s.x, s.y, s.z);
     }
 
@@ -119,7 +124,8 @@ namespace EngineMath {
       @details This operator allows access to the elements of the matrix using an index.
       If the index is out of bounds, it defaults to returning m[0] to avoid undefined behavior.
     */
-    float& operator[](int index) {
+    float& 
+      operator[](int index) {
       return m[index];
     }
 
@@ -130,7 +136,8 @@ namespace EngineMath {
       @details This operator allows read-only access to the elements of the matrix using an index.
       If the index is out of bounds, it defaults to returning m[0] to avoid undefined behavior.
 		*/
-    const float& operator[](int index) const {
+    const float& 
+      operator[](int index) const {
       return m[index];
     }
 
@@ -140,7 +147,8 @@ namespace EngineMath {
       @return A new Matrix3x3 instance representing the result of the multiplication.
       @details This operator performs matrix multiplication, which is used to combine transformations.
     */
-    Matrix3x3 operator*(const Matrix3x3& other) const {
+    Matrix3x3 
+      operator*(const Matrix3x3& other) const {
       Matrix3x3 result;
       for (int i = 0; i < 3; ++i) { 
         for (int j = 0; j < 3; ++j) { 
@@ -159,7 +167,8 @@ namespace EngineMath {
       @return A new Vector3 instance representing the result of the multiplication.
       @details This operator applies the linear transformation defined by the matrix to a 3D vector.
     */
-    Vector3 operator*(const Vector3& vec) const {
+    Vector3 
+      operator*(const Vector3& vec) const {
       return Vector3(
         m[0] * vec.x + m[1] * vec.y + m[2] * vec.z,
         m[3] * vec.x + m[4] * vec.y + m[5] * vec.z,
@@ -173,7 +182,8 @@ namespace EngineMath {
       @return A reference to this matrix after multiplication.
       @details This operator performs matrix multiplication and updates this matrix with the result.
     */
-    Matrix3x3& operator*=(const Matrix3x3& other) {
+    Matrix3x3& 
+      operator*=(const Matrix3x3& other) {
       *this = *this * other; 
       return *this;
     }
@@ -185,7 +195,8 @@ namespace EngineMath {
       @details This operator compares the elements of two matrices for equality
       with a small tolerance to account for floating-point precision errors.
     */
-    bool operator==(const Matrix3x3& other) const {
+    bool 
+      operator==(const Matrix3x3& other) const {
       for (int i = 0; i < 9; ++i) {
         if (!EngineMath::approxEqual(m[i], other.m[i])) {
           return false;
@@ -200,7 +211,8 @@ namespace EngineMath {
       @return True if the matrices are not equal, false otherwise.
 			@details This operator checks if two matrices are not equal by negating the equality check.
     */
-    bool operator!=(const Matrix3x3& other) const {
+    bool 
+      operator!=(const Matrix3x3& other) const {
       return !(*this == other);
     }
 
@@ -210,7 +222,8 @@ namespace EngineMath {
       @details This method calculates the determinant, which is useful for determining
       if the matrix is invertible and for solving linear equations.
     */
-    float determinant() const {
+    float 
+      determinant() const {
       return m[0] * (m[4] * m[8] - m[5] * m[7]) -
         m[1] * (m[3] * m[8] - m[5] * m[6]) +
         m[2] * (m[3] * m[7] - m[4] * m[6]);
@@ -221,7 +234,8 @@ namespace EngineMath {
       @return A new Matrix3x3 instance representing the transposed matrix.
       @details This method swaps the rows and columns of the matrix, which is useful in various mathematical operations.
     */
-    Matrix3x3 transpose() const {
+    Matrix3x3 
+      transpose() const {
       return Matrix3x3(m[0], m[3], m[6],
         m[1], m[4], m[7],
         m[2], m[5], m[8]);
@@ -234,7 +248,8 @@ namespace EngineMath {
       and for transforming coordinates back to their original space.
       If the determinant is zero, it returns a zero matrix to avoid division by zero.
     */
-    Matrix3x3 inverse() const {
+    Matrix3x3 
+      inverse() const {
       float det = determinant();
       if (EngineMath::approxEqual(det, 0.0f)) {
         return Matrix3x3(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -264,7 +279,8 @@ namespace EngineMath {
       @return A Matrix3x3 instance representing the identity matrix.
       @details The identity matrix is a special matrix that does not change any vector when multiplied by it.
 		*/
-    static const Matrix3x3 Identity;
+    static const 
+      Matrix3x3 Identity;
   };
 
   const Matrix3x3 Matrix3x3::Identity(1.0f, 0.0f, 0.0f,

@@ -32,6 +32,11 @@ namespace EngineMath {
 		*/
 		Quaternion(float w, float x, float y, float z) : w(w), x(x), y(y), z(z) {}
 
+		/*
+			@brief Copy constructor for the Quaternion class.
+			@param other The quaternion to copy from.
+			@details Initializes the quaternion with the values from another Quaternion instance.
+		*/
 		Quaternion(const Vector3& axis, float angle) {
 			float halfAngle = angle * 0.5f;
 			float s = sin(halfAngle);
@@ -48,7 +53,8 @@ namespace EngineMath {
 			@return A new Quaternion instance representing the result of the addition.
 			@details This operator adds the components of another quaternion to this quaternion.
 		*/
-		Quaternion operator+(const Quaternion& other) const {
+		Quaternion 
+			operator+(const Quaternion& other) const {
 			return Quaternion(w + other.w, x + other.x, y + other.y, z + other.z);
 		}
 
@@ -58,7 +64,8 @@ namespace EngineMath {
 			@return A new Quaternion instance representing the result of the subtraction.
 			@details This operator subtracts the components of another quaternion from this quaternion.
 		*/
-		Quaternion operator-(const Quaternion& other) const {
+		Quaternion 
+			operator-(const Quaternion& other) const {
 			return Quaternion(w - other.w, x - other.x, y - other.y, z - other.z);
 		}
 
@@ -68,7 +75,8 @@ namespace EngineMath {
 			@return A new Quaternion instance representing the result of the multiplication.
 			@details This operator multiplies all components of the quaternion by a scalar value.
 		*/
-		Quaternion operator*(float scalar) const {
+		Quaternion 
+			operator*(float scalar) const {
 			return Quaternion(w * scalar, x * scalar, y * scalar, z * scalar);
 		}
 
@@ -79,7 +87,8 @@ namespace EngineMath {
 			@details This operator divides all components of the quaternion by a scalar value.
 			If the scalar is zero, it returns a zero quaternion to avoid division by zero.
 		*/
-		Quaternion operator/(float scalar) const {
+		Quaternion 
+			operator/(float scalar) const {
 			if (scalar != 0.0f) {
 				return Quaternion(w / scalar, x / scalar, y / scalar, z / scalar);
 			}
@@ -92,7 +101,8 @@ namespace EngineMath {
 			@return A new Quaternion instance representing the result of the multiplication.
 			@details This operator performs quaternion multiplication, which is not commutative.
 		*/
-		Quaternion operator*(const Quaternion& other) const {
+		Quaternion 
+			operator*(const Quaternion& other) const {
 			return Quaternion(
 				w * other.w - x * other.x - y * other.y - z * other.z,
 				w * other.x + x * other.w + y * other.z - z * other.y,
@@ -107,7 +117,8 @@ namespace EngineMath {
 			@return A new Vector3 instance representing the rotated vector.
 			@details This method applies the quaternion rotation to a 3D vector.
 		*/
-		Vector3 rotate(const Vector3& vector) const {
+		Vector3 
+			rotate(const Vector3& vector) const {
 			Quaternion vectorQuat(0.0f, vector.x, vector.y, vector.z);
 			Quaternion conjugate = this->conjugate();
 			Quaternion result = (*this * vectorQuat) * conjugate;
@@ -120,7 +131,8 @@ namespace EngineMath {
 			@return A reference to the component at the specified index.
 			@details This operator allows access to the components of the quaternion using an index.
 		*/
-		Quaternion& operator+=(const Quaternion& other) {
+		Quaternion& 
+			operator+=(const Quaternion& other) {
 			w += other.w; x += other.x; y += other.y; z += other.z;
 			return *this;
 		}
@@ -131,7 +143,8 @@ namespace EngineMath {
 			@return A reference to this quaternion after subtraction.
 			@details This operator subtracts the components of another quaternion from this quaternion.
 		*/
-		Quaternion& operator-=(const Quaternion& other) {
+		Quaternion& 
+			operator-=(const Quaternion& other) {
 			w -= other.w; x -= other.x; y -= other.y; z -= other.z;
 			return *this;
 		}
@@ -142,7 +155,8 @@ namespace EngineMath {
 			@return A reference to this quaternion after multiplication.
 			@details This operator multiplies all components of the quaternion by a scalar value.
 		*/
-		Quaternion& operator*=(float scalar) {
+		Quaternion& 
+			operator*=(float scalar) {
 			w *= scalar; x *= scalar; y *= scalar; z *= scalar;
 			return *this;
 		}
@@ -154,7 +168,8 @@ namespace EngineMath {
 			@details This operator divides all components of the quaternion by a scalar value.
 			If the scalar is zero, it avoids division by zero.
 		*/
-		Quaternion& operator/=(float scalar) {
+		Quaternion& 
+			operator/=(float scalar) {
 			if (scalar != 0.0f) {
 				w /= scalar; x /= scalar; y /= scalar; z /= scalar;
 			}
@@ -167,7 +182,8 @@ namespace EngineMath {
 			@return A reference to this quaternion after multiplication.
 			@details This operator performs quaternion multiplication, which is not commutative.
 		*/
-		Quaternion& operator*=(const Quaternion& other) {
+		Quaternion& 
+			operator*=(const Quaternion& other) {
 			*this = *this * other;
 			return *this;
 		}
@@ -178,7 +194,8 @@ namespace EngineMath {
 			@return True if the quaternions are equal, false otherwise.
 			@details This operator checks if all components of the quaternions are equal within a small tolerance.
 		*/
-		bool operator==(const Quaternion& other) const {
+		bool 
+			operator==(const Quaternion& other) const {
 			const float EPSILON = 1e-6f; // Tolerance for floating-point comparison
 			return (fabs(w - other.w) < EPSILON) &&
 						 (fabs(x - other.x) < EPSILON) &&
@@ -192,7 +209,8 @@ namespace EngineMath {
 			@return True if the quaternions are not equal, false otherwise.
 			@details This operator checks if the quaternions are not equal by negating the equality check.
 		*/
-		bool operator!=(const Quaternion& other) const {
+		bool 
+			operator!=(const Quaternion& other) const {
 			return !(*this == other);
 		}
 
@@ -200,7 +218,8 @@ namespace EngineMath {
 			@brief Calculates the squared length of the quaternion.
 			@return The squared length of the quaternion.
 		*/
-		float lengthSq() const {
+		float 
+			lengthSq() const {
 			return w * w + x * x + y * y + z * z;
 		}
 
@@ -210,7 +229,8 @@ namespace EngineMath {
 			@details This method calculates the Euclidean length of the quaternion
 			using the square root of the squared length.
 		*/
-		float length() const {
+		float 
+			length() const {
 			return sqrt(lengthSq());
 		}
 
@@ -220,7 +240,8 @@ namespace EngineMath {
 			@details This method scales the quaternion to have a length of 1. If the quaternion is zero,
 			it returns a zero quaternion to avoid division by zero.
 		*/
-		void normalize() {
+		void 
+			normalize() {
 			float len = length();
 			if (len != 0.0f && len != 1.0f) {
 				*this /= len; // Scale the quaternion to unit length
@@ -233,7 +254,8 @@ namespace EngineMath {
 			@details This method scales the quaternion to have a length of 1. If the quaternion is zero,
 			it returns a zero quaternion to avoid division by zero.
 		*/
-		Quaternion normalized() const {
+		Quaternion 
+			normalized() const {
 			float len = length();
 			if (len == 0.0f) {
 				return Quaternion(0.0f, 0.0f, 0.0f, 0.0f); // Return zero quaternion to avoid division by zero
@@ -246,7 +268,8 @@ namespace EngineMath {
 			@return A new Quaternion instance representing the conjugate of this quaternion.
 			@details The conjugate of a quaternion is obtained by negating the vector part (x, y, z).
 		*/
-		Quaternion conjugate() const {
+		Quaternion 
+			conjugate() const {
 			return Quaternion(w, -x, -y, -z);
 		}
 
@@ -256,7 +279,8 @@ namespace EngineMath {
 			@details The inverse of a quaternion is its conjugate divided by its squared length.
 			If the length is zero, it returns a zero quaternion to avoid division by zero.
 		*/
-		Quaternion inverse() const {
+		Quaternion 
+			inverse() const {
 			float lenSq = lengthSq();
 			if (lenSq == 0.0f) {
 				return Quaternion(0.0f, 0.0f, 0.0f, 0.0f); // Avoid division by zero
@@ -269,7 +293,8 @@ namespace EngineMath {
 			@param other The other quaternion to compute the dot product with.
 			@return The dot product of the two quaternions.
 		*/
-		float dot(const Quaternion& other) const {
+		float 
+			dot(const Quaternion& other) const {
 			return w * other.w + x * other.x + y * other.y + z * other.z;
 		}
 
@@ -281,7 +306,8 @@ namespace EngineMath {
 			@details This method constructs a quaternion from an axis-angle representation,
 			where the axis is normalized and the angle is converted to radians.
 		*/
-		static Quaternion fromAxisAngle(const Vector3& axis, float angle) {
+		static Quaternion 
+			fromAxisAngle(const Vector3& axis, float angle) {
 			float halfAngle = angle * 0.5f;
 			float s = sin(halfAngle);
 			return Quaternion(cos(halfAngle), axis.x * s, axis.y * s, axis.z * s);
@@ -293,7 +319,8 @@ namespace EngineMath {
 			@details This method provides access to the quaternion components as a float array,
 			allowing for easy manipulation and access to the underlying data.
 		*/
-		const float* data() const {
+		const float* 
+			data() const {
 			return &w; // Return a pointer to the quaternion data
 		}
 	};

@@ -33,7 +33,8 @@ namespace EngineMath {
 			@param other The vector to copy from.
 			@details Initializes the vector with the values from another Vector2 instance.
 		*/
-		Vector2 operator+(const Vector2& other) const {
+		Vector2 
+			operator+(const Vector2& other) const {
 			return Vector2(x + other.x, y + other.y);
 		}
 
@@ -43,7 +44,8 @@ namespace EngineMath {
 			@return A new Vector2 instance representing the result of the subtraction.
 			@details This operator subtracts the components of another vector from this vector.
 		*/
-		Vector2 operator-(const Vector2& other) const {
+		Vector2 
+			operator-(const Vector2& other) const {
 			return Vector2(x - other.x, y - other.y);
 		}
 
@@ -53,7 +55,8 @@ namespace EngineMath {
 			@return A new Vector2 instance representing the result of the multiplication.
 			@details This operator multiplies both components of the vector by a scalar value.
 		*/
-		Vector2 operator*(float scalar) const {
+		Vector2 
+			operator*(float scalar) const {
 			return Vector2(x * scalar, y * scalar);
 		}
 
@@ -64,7 +67,8 @@ namespace EngineMath {
 			@details This operator divides both components of the vector by a scalar value.
 			If the scalar is zero, it returns a zero vector to avoid division by zero.
 		*/
-		Vector2 operator/(float scalar) const {
+		Vector2 
+			operator/(float scalar) const {
 			if (scalar != 0.0f) {
 				return Vector2(x / scalar, y / scalar);
 			}
@@ -78,7 +82,8 @@ namespace EngineMath {
 			@return A new Vector2 instance representing the result of the multiplication.
 			@details This operator allows scalar multiplication in the form of scalar * vector.
 		*/
-		friend Vector2 operator*(float scalar, const Vector2& vec) {
+		friend Vector2 
+			operator*(float scalar, const Vector2& vec) {
 			return Vector2(vec.x * scalar, vec.y * scalar);
 		}
 
@@ -87,7 +92,8 @@ namespace EngineMath {
 			@return A new Vector2 instance representing the negated vector.
 			@details This operator negates both components of the vector.
 		*/
-		Vector2 operator-() const {
+		Vector2 
+			operator-() const {
 			return Vector2(-x, -y);
 		}
 
@@ -97,7 +103,8 @@ namespace EngineMath {
 			@return A reference to this vector after addition.
 			@details This operator adds the components of another vector to this vector.
 		*/
-		Vector2& operator+=(const Vector2& other) {
+		Vector2& 
+			operator+=(const Vector2& other) {
 			x += other.x;
 			y += other.y;
 			return *this;
@@ -109,7 +116,8 @@ namespace EngineMath {
 			@return A reference to this vector after subtraction.
 			@details This operator subtracts the components of another vector from this vector.
 		*/
-		Vector2& operator-=(const Vector2& other) {
+		Vector2& 
+			operator-=(const Vector2& other) {
 			x -= other.x;
 			y -= other.y;
 			return *this;
@@ -121,7 +129,8 @@ namespace EngineMath {
 			@return A reference to this vector after multiplication.
 			@details This operator multiplies both components of the vector by a scalar value.
 		*/
-		Vector2& operator*=(float scalar) {
+		Vector2& 
+			operator*=(float scalar) {
 			x *= scalar;
 			y *= scalar;
 			return *this;
@@ -134,7 +143,8 @@ namespace EngineMath {
 			@details This operator divides both components of the vector by a scalar value.
 			If the scalar is zero, it avoids division by zero.
 		*/
-		Vector2& operator/=(float scalar) {
+		Vector2& 
+			operator/=(float scalar) {
 			if (scalar != 0.0f) {
 				x /= scalar;
 				y /= scalar;
@@ -149,7 +159,8 @@ namespace EngineMath {
 			@details This operator compares the components of two vectors for equality
 			with a small tolerance to account for floating-point precision errors.
 		*/
-		bool operator==(const Vector2& other) const {
+		bool 
+			operator==(const Vector2& other) const {
 			const float EPSILON = 1e-6f; // Tolerance for floating-point comparison
 			return (fabs(x - other.x) < EPSILON) && (fabs(y - other.y) < EPSILON);
 		}
@@ -160,7 +171,8 @@ namespace EngineMath {
 			@return True if the vectors are not equal, false otherwise.
 			@details This operator checks if two vectors are not equal by negating the equality check.
 		*/
-		bool operator!=(const Vector2& other) const {
+		bool 
+			operator!=(const Vector2& other) const {
 			return !(*this == other);
 		}
 
@@ -171,7 +183,8 @@ namespace EngineMath {
 			@details This operator allows access to the components of the vector using an index.
 			If the index is out of bounds, it defaults to returning x to avoid undefined behavior.
 		*/
-		float& operator[](int index) {
+		float& 
+			operator[](int index) {
 			if (index == 0) return x;
 			if (index == 1) return y;
 
@@ -185,7 +198,8 @@ namespace EngineMath {
 			@details This operator allows read-only access to the components of the vector using an index.
 			If the index is out of bounds, it defaults to returning x to avoid undefined behavior.
 		*/
-		const float& operator[](int index) const {
+		const float& 
+			operator[](int index) const {
 			if (index == 0) return x;
 			if (index == 1) return y;
 			return x; // Default return to avoid undefined behavior
@@ -197,7 +211,8 @@ namespace EngineMath {
 			@details This method calculates the square of the length of the vector,
 			which is useful for comparisons without needing to compute the square root.
 		*/
-		float lengthSq() const {
+		float 
+			lengthSq() const {
 			return x * x + y * y;
 		}
 
@@ -207,7 +222,8 @@ namespace EngineMath {
 			@details This method calculates the Euclidean length of the vector
 			using the square root of the squared length.
 		*/
-		float length() const {
+		float 
+			length() const {
 			return sqrt(lengthSq());
 		}
 
@@ -218,7 +234,8 @@ namespace EngineMath {
 			@details This method calculates the dot product, which is useful for determining
 			the angle between two vectors or projecting one vector onto another.
 		*/
-		float dot(const Vector2& other) const {
+		float 
+			dot(const Vector2& other) const {
 			return x * other.x + y * other.y;
 		}
 
@@ -229,7 +246,8 @@ namespace EngineMath {
 			@details In 2D, the cross product results in a scalar value representing the area
 			of the parallelogram formed by the two vectors.
 		*/
-		float cross(const Vector2& other) const {
+		float 
+			cross(const Vector2& other) const {
 			return x * other.y - y * other.x;
 		}
 
@@ -239,25 +257,27 @@ namespace EngineMath {
 			@details This method scales the vector to have a length of 1. If the vector is zero,
 			it returns a zero vector to avoid division by zero.
 		*/
-		Vector2 normalized() const {
-			float len = length();
-			if (len == 0.0f) {
-				return Vector2(0.0f, 0.0f);
+		Vector2 
+			normalized() const {
+				float len = length();
+				if (len == 0.0f) {
+					return Vector2(0.0f, 0.0f);
+				}
+				return *this / len;
 			}
-			return *this / len;
-		}
 
 		/*
 			@brief Normalizes the vector in place.
 			@details This method modifies the vector to have a length of 1. If the vector is zero,
 			it does nothing to avoid division by zero.
 		*/
-		void normalize() {
-			float len = length();
-			if (len != 0.0f) {
-				*this /= len;
+		void 
+			normalize() {
+				float len = length();
+				if (len != 0.0f) {
+					*this /= len;
+				}
 			}
-		}
 
 		/*
 			@brief Computes the distance between two vectors.
@@ -267,9 +287,10 @@ namespace EngineMath {
 			@details This static method calculates the Euclidean distance between two vectors
 			using the formula: distance = sqrt((a.x - b.x)^2 + (a.y - b.y)^2).
 		*/
-		static float distance(const Vector2& a, const Vector2& b) {
+		static float 
+			distance(const Vector2& a, const Vector2& b) {
 			return (a - b).length();
-		}
+			}
 
 		/*
 			@brief Computes the linear interpolation between two vectors.
@@ -280,13 +301,16 @@ namespace EngineMath {
 			@details This static method performs linear interpolation between two vectors
 			using the formula: result = a + (b - a) * t.
 		*/
-		static Vector2 lerp(const Vector2& a, const Vector2& b, float t) {
+		static Vector2 
+			lerp(const Vector2& a, const Vector2& b, float t) {
 			return a + (b - a) * t;
-		}
+			}
 		
 		// Static constants for common vectors
-		static const Vector2 Zero;
-		static const Vector2 One;
+		static const 
+			Vector2 Zero;
+		static const 
+			Vector2 One;
 	};
 
 	// Static constants definition

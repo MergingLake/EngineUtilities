@@ -41,7 +41,8 @@ namespace EngineMath {
 			@return A Matrix2x2 representing the translation.
 			@details This method creates a translation matrix that can be used to translate points in 2D space.
 		*/
-    static Matrix2x2 rotation(float angleRad) {
+    static Matrix2x2 
+      rotation(float angleRad) {
       float c = EngineMath::cos(angleRad);
       float s = EngineMath::sin(angleRad);
       return Matrix2x2(c, -s,
@@ -55,7 +56,8 @@ namespace EngineMath {
       @return A Matrix2x2 representing the scaling.
       @details This method creates a scaling matrix that can be used to scale points in 2D space.
 		*/
-    static Matrix2x2 scale(float sx, float sy) {
+    static Matrix2x2 
+      scale(float sx, float sy) {
       return Matrix2x2(sx, 0.0f,
         0.0f, sy);
     }
@@ -67,7 +69,8 @@ namespace EngineMath {
       @details This method creates a scaling matrix that can be used to scale points in 2D space
       using a Vector2 for both x and y scaling factors.
 		*/
-    static Matrix2x2 scale(const Vector2& s) {
+    static Matrix2x2 
+      scale(const Vector2& s) {
       return Matrix2x2(s.x, 0.0f,
         0.0f, s.y);
     }
@@ -79,8 +82,10 @@ namespace EngineMath {
       @details This operator allows access to the elements of the matrix using an index.
 			If the index is out of bounds, it defaults to returning m[0] to avoid undefined behavior.
 		*/
-    float& operator[](int index) { return m[index]; }
-    const float& operator[](int index) const { return m[index]; }
+    float& 
+      operator[](int index) { return m[index]; }
+    const float& 
+      operator[](int index) const { return m[index]; }
 
     /*
       @brief Multiplication operator for the Matrix2x2 class.
@@ -88,7 +93,8 @@ namespace EngineMath {
       @return A new Matrix2x2 instance representing the result of the multiplication.
 			@details This operator performs matrix multiplication, which is used to combine transformations.
 		*/
-    Matrix2x2 operator*(const Matrix2x2& other) const {
+    Matrix2x2 
+      operator*(const Matrix2x2& other) const {
       Matrix2x2 result;
       result.m[0] = m[0] * other.m[0] + m[1] * other.m[2];
       result.m[1] = m[0] * other.m[1] + m[1] * other.m[3];
@@ -103,7 +109,8 @@ namespace EngineMath {
       @return A new Vector2 instance representing the result of the multiplication.
       @details This operator applies the linear transformation defined by the matrix to a 2D vector.
 		*/
-    Vector2 operator*(const Vector2& vec) const {
+    Vector2 
+      operator*(const Vector2& vec) const {
       return Vector2(
         m[0] * vec.x + m[1] * vec.y,
         m[2] * vec.x + m[3] * vec.y
@@ -116,7 +123,8 @@ namespace EngineMath {
       @return A reference to this matrix after multiplication.
 			@details This operator performs matrix multiplication and updates this matrix with the result.
 		*/
-    Matrix2x2& operator*=(const Matrix2x2& other) {
+    Matrix2x2& 
+      operator*=(const Matrix2x2& other) {
       *this = *this * other;
       return *this;
     }
@@ -128,7 +136,8 @@ namespace EngineMath {
       @details This operator compares the elements of two matrices for equality
 			with a small tolerance to account for floating-point precision errors.
 		*/
-    bool operator==(const Matrix2x2& other) const {
+    bool 
+      operator==(const Matrix2x2& other) const {
       for (int i = 0; i < 4; ++i) {
         if (!EngineMath::approxEqual(m[i], other.m[i])) {
           return false;
@@ -143,7 +152,8 @@ namespace EngineMath {
       @return True if the matrices are not equal, false otherwise.
 			@details This operator checks if two matrices are not equal by negating the equality check.
 		*/
-    bool operator!=(const Matrix2x2& other) const {
+    bool 
+      operator!=(const Matrix2x2& other) const {
       return !(*this == other);
     }
 
@@ -153,7 +163,8 @@ namespace EngineMath {
       @details This method calculates the determinant, which is useful for determining
 			if the matrix is invertible and for solving linear equations.
     */
-    float determinant() const {
+    float 
+      determinant() const {
       return m[0] * m[3] - m[1] * m[2];
     }
 
@@ -162,7 +173,8 @@ namespace EngineMath {
       @return A new Matrix2x2 instance representing the transposed matrix.
 			@details This method swaps the rows and columns of the matrix, which is useful in various mathematical operations.
 		*/
-    Matrix2x2 transpose() const {
+    Matrix2x2 
+      transpose() const {
       return Matrix2x2(m[0], m[2],
         m[1], m[3]);
     }
@@ -174,7 +186,8 @@ namespace EngineMath {
       and for transforming coordinates back to their original space.
       If the determinant is zero, it returns a zero matrix to avoid division by zero.
 		*/
-    Matrix2x2 inverse() const {
+    Matrix2x2 
+      inverse() const {
       float det = determinant();
       if (EngineMath::approxEqual(det, 0.0f)) {
         return Matrix2x2(0.0f, 0.0f, 0.0f, 0.0f);
@@ -198,7 +211,8 @@ namespace EngineMath {
       @return A new Vector2 instance representing the transformed vector.
       @details This method applies the linear transformation defined by the matrix to a 2D vector.
 		*/
-    Vector2 transform(const Vector2& vec) const {
+    Vector2 
+      transform(const Vector2& vec) const {
       return *this * vec;
     }
 
@@ -210,7 +224,8 @@ namespace EngineMath {
       @details This method applies the linear transformation defined by the matrix to a 2D vector
       and then adds a translation vector to the result.
 		*/
-    Vector2 transform(const Vector2& vec, const Vector2& translation) const {
+    Vector2 
+      transform(const Vector2& vec, const Vector2& translation) const {
       return (*this * vec) + translation;
     }
 
@@ -219,7 +234,8 @@ namespace EngineMath {
       @return A Matrix2x2 instance representing the identity matrix.
 			@details The identity matrix is a special matrix that does not change vectors when multiplied.
 		*/
-    static const Matrix2x2 Identity;
+    static const 
+      Matrix2x2 Identity;
   };
 
   const Matrix2x2 Matrix2x2::Identity(1.0f, 0.0f, 0.0f, 1.0f);
